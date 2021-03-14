@@ -30,6 +30,7 @@ public class PackOfCards {
     }
 
     public Card getCard(){
+        System.out.println("Potiahol si tuto kartu!");
         Card firstCard = this.cards.get(0);
         this.cards.remove(0);
         this.sizeOfPackOfCards -= 1;

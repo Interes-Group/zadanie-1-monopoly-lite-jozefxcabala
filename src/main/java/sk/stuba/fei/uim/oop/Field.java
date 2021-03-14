@@ -25,7 +25,7 @@ public abstract class Field {
         this.position = position;
     }
 
-    abstract int action();
+    abstract void action(Player player, Board board);
 
     @Override
     abstract public String toString();

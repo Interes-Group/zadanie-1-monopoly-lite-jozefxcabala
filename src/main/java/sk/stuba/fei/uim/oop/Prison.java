@@ -6,8 +6,8 @@ public class Prison extends Field{
     }
 
     @Override
-    int action() {
-        return 0;
+    void action(Player player, Board board) {
+        System.out.printf("Player[%s]: Si na navsteve vo väzeni!\n", player.getName());
     }
 
     @Override

@@ -6,8 +6,8 @@ public class Start extends Field{
     }
 
     @Override
-    int action() {
-        return 0;
+    void action(Player player, Board board) {
+        System.out.println("Si na starte!");
     }
 
     @Override

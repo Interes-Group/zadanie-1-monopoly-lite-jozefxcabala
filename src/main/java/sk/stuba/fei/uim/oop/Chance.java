@@ -8,8 +8,7 @@ public class Chance extends Field{
     }
 
     @Override
-    int action() {
-        return 0;
+    void action(Player player, Board board) {
     }
 
     @Override

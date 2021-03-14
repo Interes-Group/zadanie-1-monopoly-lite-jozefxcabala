@@ -5,11 +5,11 @@ public class Building extends Field{
     private int fine;
     private Player propertyOf;
 
-    public Building(String name, int position, int value, int fine, Player propertyOf) {
+    public Building(String name, int position, int value, int fine) {
         super(name, position);
         this.value = value;
         this.fine = fine;
-        this.propertyOf = propertyOf;
+        this.propertyOf = null;
     }
 
     public int getValue() {
@@ -37,8 +37,7 @@ public class Building extends Field{
     }
 
     @Override
-    int action() {
-        return 0;
+    void action(Player player, Board board) {
     }
 
     @Override

@@ -6,8 +6,10 @@ public class Police extends Field{
     }
 
     @Override
-    int action() {
-        return 0;
+    void action(Player player, Board board) {
+        System.out.printf("Player[%s]: Chytila ta policia! Musis ist do väzenie na 2 kola:(\n", player.getName());
+        player.setActualField(board.getFieldByPosition(6));
+        player.setLapInPrison(2);
     }
 
     @Override
