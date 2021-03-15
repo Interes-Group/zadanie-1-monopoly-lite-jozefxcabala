@@ -10,7 +10,7 @@ public class BonusCard extends Card{
 
     @Override
     void action(Player player, Board board) {
-        System.out.printf("[%s]: You choose this card[%s]!\nDescription: %s\n", player.getName(), this.getName(), this.getDescription());
+        System.out.printf(ConsoleColors.chooseColor(player.getColor()) + "[%s]: You choose this card[%s]!\nDescription: %s\n", player.getName(), this.getName(), this.getDescription());
         player.setMoney(player.getMoney()+this.money);
     }
 }

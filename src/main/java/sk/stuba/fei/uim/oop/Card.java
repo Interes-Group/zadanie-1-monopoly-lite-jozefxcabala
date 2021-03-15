@@ -21,6 +21,6 @@ public abstract class Card {
 
     @Override
     public String toString() {
-        return String.format("[CARD][%s]: \nDescription of card: %s\n", this.getName(), this.getDescription());
+        return String.format(ConsoleColors.chooseColor("RESET") + "[CARD][%s]: \nDescription of card: %s\n", this.getName(), this.getDescription());
     }
 }

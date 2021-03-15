@@ -1,5 +1,6 @@
 package sk.stuba.fei.uim.oop;
 
+import java.security.CryptoPrimitive;
 import java.security.Key;
 import java.util.ArrayList;
 import java.util.Locale;
@@ -10,21 +11,22 @@ public class Game {
     final int newLapCash = 1000000;
     private int numberOfPlayers = 0;
     private ArrayList<Player> players;
+    private ArrayList<String> colors;
     private Board board;
     private Player winner;
 
     Game() {
-        System.out.println("[INFO]: Welcome to Monopoly!");
+        System.out.println(ConsoleColors.chooseColor("RESET") + "[INFO]: Welcome to Monopoly!");
         gameInicialization();
         this.winner = game();
-        System.out.printf("[%s]: You are winner!\n", this.winner.getName());
+        System.out.printf(ConsoleColors.chooseColor(this.winner.getColor()) + "[%s]: You are winner!\n", this.winner.getName());
         System.out.println(this.winner.toString());
     }
 
     private Player game(){
         int numberOfLaps = 1;
         while(checkWinner()) {
-            System.out.printf("[LAP %d]\n------------------------------\n", numberOfLaps);
+            System.out.printf(ConsoleColors.chooseColor("RESET") + "[LAP %d]\n------------------------------\n", numberOfLaps);
             gameOneStep();
 
             if(!checkWinner())
@@ -39,18 +41,18 @@ public class Game {
     private void gameOneStep(){
         for(int i = 0; i < this.numberOfPlayers; i++) {
             if(this.players.get(i).isStatus()) {
-                System.out.printf("[%s]: Is your turn! Press enter...", this.players.get(i).getName());
+                System.out.printf(ConsoleColors.chooseColor(this.players.get(i).getColor()) + "[%s]: Is your turn! Press enter...", this.players.get(i).getName());
                 KeyboardInput.readString();
-                System.out.print("[INFO]: info about player before his turn\n");
+                System.out.print(ConsoleColors.chooseColor(this.players.get(i).getColor()) + "[INFO]: info about player before his turn\n");
                 if (!this.checkPrison(players.get(i))) {
                     System.out.println(players.get(i).toString());
                     changePosition(players.get(i));
                     doAction(players.get(i));
                     checkPlayerStatus(players.get(i));
                 } else {
-                    System.out.printf("[%s]: You are in prison! [%d] laps yet!\n", this.players.get(i).getName(), this.players.get(i).getLapInPrison());
+                    System.out.printf(ConsoleColors.chooseColor(this.players.get(i).getColor()) + "[%s]: You are in prison! [%d] laps yet!\n", this.players.get(i).getName(), this.players.get(i).getLapInPrison());
                 }
-                System.out.print("[INFO]: info about player after his turn\n");
+                System.out.print(ConsoleColors.chooseColor(this.players.get(i).getColor()) + "[INFO]: info about player after his turn\n");
                 System.out.println(players.get(i).toString());
 
                 if(!checkWinner())
@@ -61,7 +63,7 @@ public class Game {
 
     private void checkNewLap(Player player){
         if(player.isNewLap() && player.isStatus()) {
-            System.out.printf("[%s]: You start new lap! +%d€ on your account!\n", player.getName(), this.newLapCash);
+            System.out.printf(ConsoleColors.chooseColor(player.getColor()) + "[%s]: You start new lap! +%d€ on your account!\n", player.getName(), this.newLapCash);
             player.setMoney(player.getMoney() + this.newLapCash);
             player.setNewLap(false);
         }
@@ -75,7 +77,7 @@ public class Game {
 
     private void checkPlayerStatus(Player player){
         if(player.getMoney() < 0){
-            System.out.printf("[%s]: You lost!\n", player.getName());
+            System.out.printf(ConsoleColors.chooseColor(player.getColor()) + "[%s]: You lost!\n", player.getName());
             player.setStatus(false);
             returnProperties(player);
             player.getProperties().clear();
@@ -118,9 +120,22 @@ public class Game {
     private void gameInicialization(){
         this.winner = null;
         this.board = new Board();
+        colorInicialization();
         playerInicialization();
 
         printPlayers();
+    }
+
+    private void colorInicialization(){
+        this.colors = new ArrayList<>();
+        colors.add("RED");
+        colors.add("GREEN");
+        colors.add("YELLOW");
+        colors.add("BLUE");
+        colors.add("PURPLE");
+        colors.add("CYAN");
+        colors.add("ORANGE");
+        colors.add("BROWN");
     }
 
     private int rollTheDice(){
@@ -130,9 +145,9 @@ public class Game {
 
     private void changePosition(Player player){
         int dice = this.rollTheDice();
-        System.out.printf("[%s]: Hadzes kockou! Press enter...", player.getName());
+        System.out.printf(ConsoleColors.chooseColor(player.getColor()) + "[%s]: Hadzes kockou! Press enter...", player.getName());
         KeyboardInput.readString();
-        System.out.printf("[%s]: hodil kockou cislo[%d]\n", player.getName(), dice);
+        System.out.printf(ConsoleColors.chooseColor(player.getColor()) + "[%s]: hodil kockou cislo[%d]\n", player.getName(), dice);
         if((player.getActualField().getPosition() + dice) < this.board.getSizeOfBoard()) {
             player.setActualField(this.board.getFieldByPosition(player.getActualField().getPosition() + dice));
             player.setNewLap(false);
@@ -145,35 +160,38 @@ public class Game {
 
     private void playerInicialization(){
         while(this.numberOfPlayers < 2) {
-            this.numberOfPlayers = KeyboardInput.readInt("[INFO]: Enter number of players");
+            this.numberOfPlayers = KeyboardInput.readInt(ConsoleColors.chooseColor("RESET") + "[INFO]: Enter number of players");
             if(this.numberOfPlayers < 2)
-                System.out.println("[INFO]: You enter wrong input! Try again!");
+                System.out.println(ConsoleColors.chooseColor("RESET") + "[INFO]: You enter wrong input! Try again!");
 
         }
         this.players = new ArrayList<>();
 
+
         for(int i = 0; i < this.numberOfPlayers; i++){
-            this.players.add(new Player(KeyboardInput.readString("[INFO]: Entry name of player").toUpperCase(Locale.ROOT), KeyboardInput.readString("[INFO]: Entry color of player").toLowerCase(Locale.ROOT),
-                    KeyboardInput.readString("[INFO]: Entry figure of player").toLowerCase(Locale.ROOT), this.entryCash, board.getFields().get(0)));
+            this.players.add(new Player(KeyboardInput.readString(ConsoleColors.chooseColor("RESET") + "[INFO]: Entry name of player").toUpperCase(Locale.ROOT),
+                    this.colors.get(i%this.colors.size()),
+                    KeyboardInput.readString(ConsoleColors.chooseColor("RESET") + "[INFO]: Entry figure of player").toLowerCase(Locale.ROOT),
+                    this.entryCash, board.getFields().get(0)));
         }
     }
 
     private void printPlayers(){
-        System.out.println("[INFO]: All players info\n");
+        System.out.println(ConsoleColors.chooseColor("RESET") + "[INFO]: All players info\n");
         for(int i = 0; i < this.numberOfPlayers; i++){
             System.out.println(this.players.get(i).toString());
         }
     }
 
     private void printBoard(){
-        System.out.println("[INFO]: Board info\n");
+        System.out.println(ConsoleColors.chooseColor("RESET") + "[INFO]: Board info\n");
         for(int i = 0; i < this.board.getSizeOfBoard(); i++){
             System.out.println(this.board.getFields().get(i).toString());
         }
     }
 
     private void printPackOfCards(){
-        System.out.println("[INFO]: All cards in pack info");
+        System.out.println(ConsoleColors.chooseColor("RESET") + "[INFO]: All cards in pack info");
         for(int i = 0; i < this.board.getCards().getSizeOfPackOfCards(); i++){
             System.out.println(this.board.getCards().getCard().toString());
         }

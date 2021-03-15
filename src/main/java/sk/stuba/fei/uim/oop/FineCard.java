@@ -10,9 +10,9 @@ public class FineCard extends Card{
 
     @Override
     void action(Player player, Board board) {
-        System.out.printf("[%s]: You choose this card[%s]!\nDescription: %s\n", player.getName(), this.getName(), this.getDescription());
+        System.out.printf(ConsoleColors.chooseColor(player.getColor()) + "[%s]: You choose this card[%s]!\nDescription: %s\n", player.getName(), this.getName(), this.getDescription());
         if(player.getMoney() < this.money) {
-            System.out.printf("[%s]: You dont have enough money[%d €]! Zaplat vsetko co mas a vyhlas bankrot!\n", player.getName(), player.getMoney());
+            System.out.printf(ConsoleColors.chooseColor(player.getColor()) + "[%s]: You dont have enough money[%d €]! Zaplat vsetko co mas a vyhlas bankrot!\n", player.getName(), player.getMoney());
             player.setMoney(-1);
             player.setStatus(false);
         }

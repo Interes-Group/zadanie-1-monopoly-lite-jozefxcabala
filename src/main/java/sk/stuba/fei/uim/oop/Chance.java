@@ -12,6 +12,6 @@ public class Chance extends Field{
 
     @Override
     public String toString() {
-        return String.format("[FIELD][%s]: \nPosition: %d\n", this.getName(), this.getPosition());
+        return String.format(ConsoleColors.chooseColor("RESET") + "[FIELD][%s]: \nPosition: %d\n", this.getName(), this.getPosition());
     }
 }

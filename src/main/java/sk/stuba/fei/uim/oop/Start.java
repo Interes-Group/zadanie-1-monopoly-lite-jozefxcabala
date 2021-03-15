@@ -9,11 +9,11 @@ public class Start extends Field{
 
     @Override
     void action(Player player, Board board) {
-        System.out.printf("[%s]: You are on start!\n", player.getName());
+        System.out.printf(ConsoleColors.chooseColor(player.getColor()) + "[%s]: You are on start!\n", player.getName());
     }
 
     @Override
     public String toString() {
-        return String.format("[FIELD][%s]: \nPosition: %d\n", this.getName(), this.getPosition());
+        return String.format(ConsoleColors.chooseColor("RESET") + "[FIELD][%s]: \nPosition: %d\n", this.getName(), this.getPosition());
     }
 }
