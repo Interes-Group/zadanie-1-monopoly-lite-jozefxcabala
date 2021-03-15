@@ -27,7 +27,7 @@ public class Board {
         this.fields.add(new Building("Slavin", 13, 20000000, 5000000));
         this.fields.add(new Chance("Chance", 14));
         this.fields.add(new Building("Modry kostol", 15, 10000000, 2000000));
-        this.fields.add(new Building("Cumil", 16, 1000000, 30000));
+        this.fields.add(new Building("Cumil", 16, 1000000, 300000));
         this.fields.add(new Building("UFO", 17, 2000000, 500000));
         this.fields.add(new Building("SND", 18, 8000000, 2000000));
         this.fields.add(new Police("Police!", 19));

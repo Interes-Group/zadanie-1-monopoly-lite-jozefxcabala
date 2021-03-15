@@ -34,8 +34,8 @@ public class Building extends Field{
         if(player.isStatus()) {
             if (this.propertyOf == null) {
                 if (player.getMoney() >= this.value) {
-                    System.out.printf("[%s]: Mozes kupit tuto budovu, zvol moznost... [y/n]\n", player.getName());
-                    System.out.printf("\n[FIELD][%s]: \nPosition: %d\nValue: %d\nFine: %d\nProperty of: %s\n", this.getName(), this.getPosition(),
+                    System.out.printf("[%s]: Mozes kupit tuto budovu[%s], zvol moznost... [y/n]\n", player.getName(), this.getName());
+                    System.out.printf("\n[FIELD][%s]: \nPosition: %d\nValue: %d €\nFine: %d €\nProperty of: %s\n", this.getName(), this.getPosition(),
                             this.getValue(), this.getFine(), (this.getPropertyOf() != null)?this.getPropertyOf().getName():"i doesnt have owner");
                     if (KeyboardInput.readString("\n[y/n]").equals("y")) {
                         System.out.printf("\n[%s]: You have new property!\n", player.getName());
@@ -45,13 +45,22 @@ public class Building extends Field{
                     } else
                         System.out.printf("\n[%s]: You choose dont buy new property[%s]!\n", player.getName(), this.getName());
                 } else
-                    System.out.printf("[%s]: You dont have enough money for buing this[%s][%s]!\n", player.getName(), this.getName(), this.getValue());
+                    System.out.printf("[%s]: You dont have enough money for buing this[%s][%d €]!\n", player.getName(), this.getName(), this.getValue());
 
             } else if (this.propertyOf != player) {
-                System.out.printf("[%s]: Stupil si na policko Player[%s][%s], musis mu zaplatit poplatok[%d€]!\n",
+                System.out.printf("[%s]: Stupil si na policko Player[%s][%s], musis mu zaplatit poplatok[%d €]!\n",
                         player.getName(), this.propertyOf.getName(), this.getName(), this.fine);
-                player.setMoney(player.getMoney() - this.fine);
-                this.propertyOf.setMoney(this.propertyOf.getMoney() + this.fine);
+                if(player.getMoney() < this.fine){
+                    System.out.printf("[%s]: You dont have enough money! Zaplat vsetko co mas[%d €]!\n",
+                            player.getName(), player.getMoney());
+                    this.propertyOf.setMoney(this.propertyOf.getMoney() + player.getMoney());
+                    player.setMoney(-1);
+                    player.setStatus(false);
+                }
+                else{
+                    player.setMoney(player.getMoney() - this.fine);
+                    this.propertyOf.setMoney(this.propertyOf.getMoney() + this.fine);
+                }
             } else {
                 System.out.printf("[%s]: You are visit your property[%s]!\n", player.getName(), this.getName());
             }
@@ -63,7 +72,7 @@ public class Building extends Field{
 
     @Override
     public String toString() {
-        return String.format("\n[FIELD][%s]: \nPosition: %d\nValue: %d\nFine: %d\nProperty of: %s\n", this.getName(), this.getPosition(),
+        return String.format("\n[FIELD][%s]: \nPosition: %d\nValue: %d €\nFine: %d €\nProperty of: %s\n", this.getName(), this.getPosition(),
                 this.getValue(), this.getFine(), (this.getPropertyOf() != null)?this.getPropertyOf().getName():"i doesnt have owner");
     }
 }

@@ -99,7 +99,7 @@ public class Player{
 
     @Override
     public String toString() {
-        return String.format("\n[%s]:\nColor: %s\nFigure: %s\nPosition: %s\nMoney: %d\nLap in prison: %d\nProperties: %s\n", this.getName(),
+        return String.format("\n[%s]:\nColor: %s\nFigure: %s\nPosition: %s\nMoney: %d €\nLap in prison: %d\nProperties: %s\n", this.getName(),
                 this.getColor(), this.getFigure(), this.getActualField().getName(), this.getMoney(), this.getLapInPrison(), getStringOfProperties());
     }
 }

@@ -2,21 +2,23 @@ package sk.stuba.fei.uim.oop;
 
 import java.security.Key;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Random;
 
 public class Game {
     final int entryCash = 10000000;
     final int newLapCash = 1000000;
-    private int numberOfPlayers;
+    private int numberOfPlayers = 0;
     private ArrayList<Player> players;
     private Board board;
     private Player winner;
 
     Game() {
-        System.out.println("Welcome to Monopoly!\n");
+        System.out.println("[INFO]: Welcome to Monopoly!");
         gameInicialization();
         this.winner = game();
         System.out.printf("[%s]: You are winner!\n", this.winner.getName());
+        System.out.println(this.winner.toString());
     }
 
     private Player game(){
@@ -58,7 +60,7 @@ public class Game {
     }
 
     private void checkNewLap(Player player){
-        if(player.isNewLap()) {
+        if(player.isNewLap() && player.isStatus()) {
             System.out.printf("[%s]: You start new lap! +%d€ on your account!\n", player.getName(), this.newLapCash);
             player.setMoney(player.getMoney() + this.newLapCash);
             player.setNewLap(false);
@@ -142,13 +144,17 @@ public class Game {
     }
 
     private void playerInicialization(){
-        this.numberOfPlayers = KeyboardInput.readInt("Enter number of players");
+        while(this.numberOfPlayers < 2) {
+            this.numberOfPlayers = KeyboardInput.readInt("[INFO]: Enter number of players");
+            if(this.numberOfPlayers < 2)
+                System.out.println("[INFO]: You enter wrong input! Try again!");
+
+        }
         this.players = new ArrayList<>();
 
         for(int i = 0; i < this.numberOfPlayers; i++){
-            this.players.add(new Player(KeyboardInput.readString("Entry name of player"), KeyboardInput.readString("Entry color of player"),
-                    KeyboardInput.readString("Entry figure of player"), this.entryCash, board.getFields().get(0)));
-            System.out.println();
+            this.players.add(new Player(KeyboardInput.readString("[INFO]: Entry name of player").toUpperCase(Locale.ROOT), KeyboardInput.readString("[INFO]: Entry color of player").toLowerCase(Locale.ROOT),
+                    KeyboardInput.readString("[INFO]: Entry figure of player").toLowerCase(Locale.ROOT), this.entryCash, board.getFields().get(0)));
         }
     }
 
