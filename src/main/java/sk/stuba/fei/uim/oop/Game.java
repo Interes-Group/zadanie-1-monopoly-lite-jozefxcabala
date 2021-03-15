@@ -1,7 +1,5 @@
 package sk.stuba.fei.uim.oop;
 
-import java.security.CryptoPrimitive;
-import java.security.Key;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Random;

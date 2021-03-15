@@ -37,7 +37,14 @@ public class Building extends Field{
                     System.out.printf(ConsoleColors.chooseColor(player.getColor()) + "[%s]: Mozes kupit tuto budovu[%s], zvol moznost... [y/n]\n", player.getName(), this.getName());
                     System.out.printf(ConsoleColors.chooseColor("RESET") + "\n[FIELD][%s]: \nPosition: %d\nValue: %d €\nFine: %d €\nProperty of: %s\n", this.getName(), this.getPosition(),
                             this.getValue(), this.getFine(), (this.getPropertyOf() != null)?this.getPropertyOf().getName():"i doesnt have owner");
-                    if (KeyboardInput.readString(ConsoleColors.chooseColor(player.getColor()) + "\n[y/n]").equals("y")) {
+                    String choice = "";
+
+                    while(!(choice.equals("y") || choice.equals("n"))){
+                        choice = KeyboardInput.readString(ConsoleColors.chooseColor(player.getColor()) + "\n[y/n]");
+                        if(!(choice.equals("y") || choice.equals("n")))
+                            System.out.printf("[INFO]: %s is wrong input, try again!", choice);
+                    }
+                    if (choice.equals("y")) {
                         System.out.printf(ConsoleColors.chooseColor(player.getColor()) + "\n[%s]: You have new property!\n", player.getName());
                         this.propertyOf = player;
                         player.setMoney(player.getMoney() - this.value);
