@@ -1,32 +1,36 @@
 package sk.stuba.fei.uim.oop;
 
-import java.util.Random;
+import java.util.ArrayList;
 
 public class Player{
-    private String name;
-    private String color;
-    private String figure;
-    private int id;
+    private final String name;
+    private final String color;
+    private final String figure;
     private boolean status; //true - in game , false - out of game
     private Field actualField;
     private int money;
     private boolean newLap;
     private int lapInPrison;
+    private ArrayList<Field> properties;
 
-    public Player(){
-        System.out.println("I create player!");
-    }
-
-    public Player(String name, String color, String figure, int id, int money, Field startPosition) {
+    public Player(String name, String color, String figure, int money, Field startPosition) {
         this.name = name;
         this.color = color;
         this.figure = figure;
-        this.id = id;
         this.money = money;
         this.status = true;
         this.actualField = startPosition;
         this.newLap = false;
         this.lapInPrison = 0;
+        this.properties = new ArrayList<>();
+    }
+
+    public ArrayList<Field> getProperties() {
+        return properties;
+    }
+
+    public void setProperties(ArrayList<Field> properties) {
+        this.properties = properties;
     }
 
     public int getLapInPrison() {
@@ -49,32 +53,12 @@ public class Player{
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getColor() {
         return color;
     }
 
-    public void setColor(String color) {
-        this.color = color;
-    }
-
     public String getFigure() {
         return figure;
-    }
-
-    public void setFigure(String figure) {
-        this.figure = figure;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public boolean isStatus() {
@@ -101,8 +85,21 @@ public class Player{
         this.money = money;
     }
 
+    private StringBuilder getStringOfProperties(){
+        StringBuilder properties = new StringBuilder();
+        for (Field property : this.properties) {
+            properties.append(property.getName());
+            properties.append("-");
+        }
+        if(properties.length() > 0)
+            properties.deleteCharAt(properties.length() - 1);
+
+        return properties;
+    }
+
     @Override
     public String toString() {
-        return String.format("Player: %d\nName: %s\nColor: %s\nFigure: %s\nPosition: %s\nMoney: %d\n", this.getId(), this.getName(), this.getColor(), this.getFigure(), this.getActualField().getName(), this.getMoney());
+        return String.format("\n[%s]:\nColor: %s\nFigure: %s\nPosition: %s\nMoney: %d\nLap in prison: %d\nProperties: %s\n", this.getName(),
+                this.getColor(), this.getFigure(), this.getActualField().getName(), this.getMoney(), this.getLapInPrison(), getStringOfProperties());
     }
 }

@@ -1,54 +1,26 @@
 package sk.stuba.fei.uim.oop;
 
-import java.util.ArrayList;
+public abstract class Card {
+    private final String name;
+    private final String description;
 
-public class Card {
-    private int id;
-    private String name;
-    private String description;
-    private int action;
-
-    public Card(int id, String name, String description, int action) {
-        this.id = id;
+    public Card(String name, String description) {
         this.name = name;
         this.description = description;
-        this.action = action;
-    }
-
-    public int getAction() {
-        return action;
-    }
-
-    public void setAction(int action) {
-        this.action = action;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+    abstract void action(Player player, Board board);
 
     @Override
     public String toString() {
-        return String.format("Id of card: %d\nName of card: %s\nDescription of card: %s\n", this.getId(), this.getName(), this.getDescription());
+        return String.format("[CARD][%s]: \nDescription of card: %s\n", this.getName(), this.getDescription());
     }
 }

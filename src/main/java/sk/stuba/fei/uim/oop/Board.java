@@ -12,29 +12,29 @@ public class Board {
         this.cards = new PackOfCards();
 
         this.fields.add(new Start("Start", 0));
-        this.fields.add(new Building("Dom1", 1, 200, 50));
+        this.fields.add(new Building("Bratislavsky hrad", 1, 50000000, 10000000));
         this.fields.add(new Chance("Chance", 2));
-        this.fields.add(new Building("Dom2", 3, 200, 50));
-        this.fields.add(new Building("Dom3", 4, 200, 50));
-        this.fields.add(new Building("Dom4", 5, 200, 50));
-        this.fields.add(new Prison("Prison", 6));
-        this.fields.add(new Building("Dom5", 7, 200, 50));
-        this.fields.add(new Chance("Chance", 8));
-        this.fields.add(new Building("Dom6", 9, 200, 50));
-        this.fields.add(new Building("Dom7", 10, 200, 50));
-        this.fields.add(new Fees("Pay fees!", 11));
-        this.fields.add(new Building("Dom8", 12, 200, 50));
-        this.fields.add(new Building("Dom9", 13, 200, 50));
+        this.fields.add(new Building("Dom sv. Martina", 3, 10000000, 2500000));
+        this.fields.add(new Building("Stara radnica", 4, 10000000, 3000000));
+        this.fields.add(new Building("Primacialny palac", 5, 15000000, 5000000));
+        this.fields.add(new Building("Grasalkovicov palac", 6, 15000000, 5000000));
+        this.fields.add(new Prison("Prison", 7));
+        this.fields.add(new Building("Michalska veza s branou", 8, 5000000, 2000000));
+        this.fields.add(new Chance("Chance", 9));
+        this.fields.add(new Building("Mirbachov palac", 10, 15000000, 5000000));
+        this.fields.add(new Building("Hrad Devin", 11, 25000000, 9000000));
+        this.fields.add(new Fees("Pay fees!", 12));
+        this.fields.add(new Building("Slavin", 13, 20000000, 5000000));
         this.fields.add(new Chance("Chance", 14));
-        this.fields.add(new Building("Dom10", 15, 200, 50));
-        this.fields.add(new Building("Dom11", 16, 200, 50));
-        this.fields.add(new Building("Dom12", 17, 200, 50));
-        this.fields.add(new Building("Dom13", 18, 200, 50));
+        this.fields.add(new Building("Modry kostol", 15, 10000000, 2000000));
+        this.fields.add(new Building("Cumil", 16, 1000000, 30000));
+        this.fields.add(new Building("UFO", 17, 2000000, 500000));
+        this.fields.add(new Building("SND", 18, 8000000, 2000000));
         this.fields.add(new Police("Police!", 19));
-        this.fields.add(new Building("Dom14", 20, 200, 50));
+        this.fields.add(new Building("Arena Ondreja Nepelu", 20, 13000000, 4000000));
         this.fields.add(new Chance("Chance", 21));
-        this.fields.add(new Building("Dom15", 22, 200, 50));
-        this.fields.add(new Building("Dom16", 23, 200, 50));
+        this.fields.add(new Building("Kotolna", 22, 500000, 150000));
+        this.fields.add(new Building("Aupark", 23, 8000000, 3000000));
     }
 
     public ArrayList<Field> getFields() {
@@ -52,4 +52,5 @@ public class Board {
     public PackOfCards getCards() {
         return cards;
     }
+
 }

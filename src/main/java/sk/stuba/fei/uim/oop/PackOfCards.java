@@ -3,22 +3,25 @@ package sk.stuba.fei.uim.oop;
 import java.util.ArrayList;
 
 public class PackOfCards {
-    private int sizeOfPackOfCards = 10;
+    private final int sizeOfPackOfCards = 10;
     final ArrayList<Card> cards;
+    private int actualCardIndex;
 
     public PackOfCards() {
         this.cards = new ArrayList<>();
+        this.actualCardIndex = 0;
 
-        this.cards.add(new Card(0, "Ops! Police :(", "Bol si chyteny policiou, musis ist do vazenia!", 6));
-        this.cards.add(new Card(1, "Bonus!", "Dostavas 500€ od banky!", 500));
-        this.cards.add(new Card(2, "Bonus!", "Dostavas 2000€ od banky!",2000));
-        this.cards.add(new Card(3, "Pokuta!", "Musis zaplatit pokutu 500€!", 500));
-        this.cards.add(new Card(4, "Pokuta!", "Musis zaplatit pokutu 2000€!", 2000));
-        this.cards.add(new Card(5, "Darcek!", "Kazdy hrac ti musi dat 1000€!", 1000));
-        this.cards.add(new Card(6, "Ops! Police :(", "Bol si chyteny policiou, musis ist do vazenia!", 6));
-        this.cards.add(new Card(7, "Bonus!", "Dostavas 500€ od banky!", 500));
-        this.cards.add(new Card(8, "Bonus!", "Dostavas 2000€ od banky!",2000));
-        this.cards.add(new Card(9, "Pokuta!", "Musis zaplatit pokutu 1500€!", 1500));
+        this.cards.add(new PoliceCard("Ops! Police :(", "Bol si chyteny policiou, musis ist do vazenia!"));
+        this.cards.add(new BonusCard( "Bonus!", "Dostavas 2 000 000€ od banky!", 2000000));
+        this.cards.add(new BonusCard("Bonus!", "Dostavas 1 000 000€ od banky!",1000000));
+        this.cards.add(new FineCard( "Pokuta!", "Musis zaplatit pokutu 2 000 000€!", 2000000));
+        this.cards.add(new FineCard("Pokuta!", "Musis zaplatit pokutu 3 000 000€!", 3000000));
+        this.cards.add(new StartCard( "Chod na start!", "Presun sa na start a prevezmi si peniaze z banky!"));
+        this.cards.add(new PoliceCard( "Ops! Police :(", "Bol si chyteny policiou, musis ist do vazenia!"));
+        this.cards.add(new BonusCard( "Bonus!", "Dostavas 1 000 000€ od banky!", 1000000));
+        this.cards.add(new BonusCard( "Bonus!", "Dostavas 1 500 000€ od banky!",1500000));
+        this.cards.add(new FineCard( "Pokuta!", "Musis zaplatit pokutu 5 000 000€!", 5000000));
+
     }
 
     public int getSizeOfPackOfCards() {
@@ -30,10 +33,9 @@ public class PackOfCards {
     }
 
     public Card getCard(){
-        System.out.println("Potiahol si tuto kartu!");
-        Card firstCard = this.cards.get(0);
-        this.cards.remove(0);
-        this.sizeOfPackOfCards -= 1;
+        Card firstCard = this.cards.get(this.actualCardIndex % this.sizeOfPackOfCards);
+        this.actualCardIndex += 1;
+
         return firstCard;
     }
 }

@@ -7,10 +7,13 @@ public class Fees extends Field{
 
     @Override
     void action(Player player, Board board) {
+        System.out.printf("[%s]: You must pay 20%% fees from your wealthy[%d]!\n", player.getName(), (20*player.getMoney()/100));
+        player.setMoney(player.getMoney() - 20*player.getMoney()/100);
     }
 
     @Override
     public String toString() {
-        return String.format("Field: %s\nPosition: %d\n", this.getName(), this.getPosition());
+        return String.format("[FIELD][%s]: \nPosition: %d\n", this.getName(), this.getPosition());
     }
 }
+
