@@ -157,9 +157,9 @@ public class Game {
     }
 
     private void playerInicialization(){
-        while(this.numberOfPlayers < 2) {
-            this.numberOfPlayers = KeyboardInput.readInt(ConsoleColors.chooseColor("RESET") + "[INFO]: Enter number of players");
-            if(this.numberOfPlayers < 2)
+        while(this.numberOfPlayers < 2 || this.numberOfPlayers > 6) {
+            this.numberOfPlayers = KeyboardInput.readInt(ConsoleColors.chooseColor("RESET") + "[INFO]: Enter number of players[max 6]");
+            if(this.numberOfPlayers < 2 || this.numberOfPlayers > 6)
                 System.out.println(ConsoleColors.chooseColor("RESET") + "[INFO]: You enter wrong input! Try again!");
 
         }
@@ -168,7 +168,7 @@ public class Game {
         for(int i = 0; i < this.numberOfPlayers; i++){
             this.players.add(new Player(KeyboardInput.readString(ConsoleColors.chooseColor("RESET") + "[INFO]: Entry name of player").toUpperCase(Locale.ROOT),
                     this.colors.get(i%this.colors.size()),
-                    KeyboardInput.readString(ConsoleColors.chooseColor("RESET") + "[INFO]: Entry figure of player").toLowerCase(Locale.ROOT),
+                    "nothing", //KeyboardInput.readString(ConsoleColors.chooseColor("RESET") + "[INFO]: Entry figure of player").toLowerCase(Locale.ROOT),
                     this.entryCash, board.getFields().get(0)));
         }
     }
