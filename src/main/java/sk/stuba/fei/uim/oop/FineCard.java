@@ -12,8 +12,8 @@ public class FineCard extends Card{
     void action(Player player, Board board) {
         System.out.printf(ConsoleColors.chooseColor(player.getColor()) + "[%s]: You choose this card[%s]!\nDescription: %s\n", player.getName(), this.getName(), this.getDescription());
         if(player.getMoney() < this.money) {
-            System.out.printf(ConsoleColors.chooseColor(player.getColor()) + "[%s]: You dont have enough money[%d €]! Zaplat vsetko co mas a vyhlas bankrot!\n", player.getName(), player.getMoney());
-            player.setMoney(-1);
+            System.out.printf(ConsoleColors.chooseColor(player.getColor()) + "[%s]: You are broke. [%d €]! Pay everything you have and declare bankruptcy!\n", player.getName(), player.getMoney());
+            player.setMoney(-1); //Player doesnt have money, player lost
             player.setStatus(false);
         }
         else

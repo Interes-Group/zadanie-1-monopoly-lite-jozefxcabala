@@ -4,7 +4,7 @@ public class Start extends Field{
     private final int newLapCash;
     Start(String name, int position){
         super(name, position);
-        this.newLapCash = 2000;
+        this.newLapCash = 1000000;
     }
 
     @Override

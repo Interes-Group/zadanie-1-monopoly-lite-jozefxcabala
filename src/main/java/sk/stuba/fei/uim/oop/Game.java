@@ -16,12 +16,12 @@ public class Game {
     Game() {
         System.out.println(ConsoleColors.chooseColor("RESET") + "[INFO]: Welcome to Monopoly!");
         gameInicialization();
-        this.winner = game();
+        this.winner = PlayGame();
         System.out.printf(ConsoleColors.chooseColor(this.winner.getColor()) + "[%s]: You are winner!\n", this.winner.getName());
         System.out.println(this.winner.toString());
     }
 
-    private Player game(){
+    private Player PlayGame(){
         int numberOfLaps = 1;
         while(checkWinner()) {
             System.out.printf(ConsoleColors.chooseColor("RESET") + "[LAP %d]\n------------------------------\n", numberOfLaps);
@@ -50,7 +50,7 @@ public class Game {
                 } else {
                     System.out.printf(ConsoleColors.chooseColor(this.players.get(i).getColor()) + "[%s]: You are in prison! [%d] laps yet!\n", this.players.get(i).getName(), this.players.get(i).getLapInPrison());
                 }
-                System.out.print(ConsoleColors.chooseColor(this.players.get(i).getColor()) + "[INFO]: info about player after his turn\n");
+                System.out.print(ConsoleColors.chooseColor(this.players.get(i).getColor()) + "[INFO]: Info about player after his turn\n");
                 System.out.println(players.get(i).toString());
 
                 if(!checkWinner())
@@ -118,9 +118,9 @@ public class Game {
     private void gameInicialization(){
         this.winner = null;
         this.board = new Board();
+
         colorInicialization();
         playerInicialization();
-
         printPlayers();
     }
 
@@ -143,9 +143,9 @@ public class Game {
 
     private void changePosition(Player player){
         int dice = this.rollTheDice();
-        System.out.printf(ConsoleColors.chooseColor(player.getColor()) + "[%s]: Hadzes kockou! Press enter...", player.getName());
+        System.out.printf(ConsoleColors.chooseColor(player.getColor()) + "[%s]: Roll the dice! Press enter...", player.getName());
         KeyboardInput.readString();
-        System.out.printf(ConsoleColors.chooseColor(player.getColor()) + "[%s]: hodil kockou cislo[%d]\n", player.getName(), dice);
+        System.out.printf(ConsoleColors.chooseColor(player.getColor()) + "[%s]: The number you have rolled is: [%d]\n", player.getName(), dice);
         if((player.getActualField().getPosition() + dice) < this.board.getSizeOfBoard()) {
             player.setActualField(this.board.getFieldByPosition(player.getActualField().getPosition() + dice));
             player.setNewLap(false);
@@ -164,7 +164,6 @@ public class Game {
 
         }
         this.players = new ArrayList<>();
-
 
         for(int i = 0; i < this.numberOfPlayers; i++){
             this.players.add(new Player(KeyboardInput.readString(ConsoleColors.chooseColor("RESET") + "[INFO]: Entry name of player").toUpperCase(Locale.ROOT),

@@ -11,16 +11,16 @@ public class PackOfCards {
         this.cards = new ArrayList<>();
         this.actualCardIndex = 0;
 
-        this.cards.add(new PoliceCard("Ops! Police :(", "Bol si chyteny policiou, musis ist do vazenia!"));
-        this.cards.add(new BonusCard( "Bonus!", "Dostavas 2 000 000 € od banky!", 2000000));
-        this.cards.add(new BonusCard("Bonus!", "Dostavas 1 000 000 € od banky!",1000000));
-        this.cards.add(new FineCard( "Pokuta!", "Musis zaplatit pokutu 2 000 000 €!", 2000000));
-        this.cards.add(new FineCard("Pokuta!", "Musis zaplatit pokutu 3 000 000 €!", 3000000));
-        this.cards.add(new StartCard( "Chod na start!", "Presun sa na start a prevezmi si peniaze z banky!"));
-        this.cards.add(new PoliceCard( "Ops! Police :(", "Bol si chyteny policiou, musis ist do vazenia!"));
-        this.cards.add(new BonusCard( "Bonus!", "Dostavas 1 000 000 € od banky!", 1000000));
-        this.cards.add(new BonusCard( "Bonus!", "Dostavas 1 500 000 € od banky!",1500000));
-        this.cards.add(new FineCard( "Pokuta!", "Musis zaplatit pokutu 5 000 000 €!", 5000000));
+        this.cards.add(new PoliceCard("Ops! Police :(", "You are arrested, go to jail!"));
+        this.cards.add(new BonusCard( "Bonus!", "The bank will give you 2 000 000 € !", 2000000));
+        this.cards.add(new BonusCard("Bonus!", "The bank will give you 1 000 000 € !!",1000000));
+        this.cards.add(new FineCard( "Fine!", "Pay 2 000 000 € fine!", 2000000));
+        this.cards.add(new FineCard("Fine!", "Pay 3 000 000 € fine!", 3000000));
+        this.cards.add(new StartCard("Go to the start!", "Go to the start and collect money from the bank!"));
+        this.cards.add(new PoliceCard( "Ops! Police :(", "You are arrested, go to jail!"));
+        this.cards.add(new BonusCard( "Bonus!", "The bank will give you 1 000 000 € !", 1000000));
+        this.cards.add(new BonusCard( "Bonus!", "The bank will give you 1 500 000 € !",1500000));
+        this.cards.add(new FineCard( "Fine!", "Pay 5 000 000 € fine!", 5000000));
 
     }
 
